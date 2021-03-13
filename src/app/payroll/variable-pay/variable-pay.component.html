@@ -1,0 +1,284 @@
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Variable Pay</div>
+                </div>
+                <div class="ibox-body">
+                    <ul class="nav nav-tabs tabs-line">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i class="fa fa-line-chart"></i> Variable-Pay List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-heartbeat"></i> Enter Variable-Pay Detail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-life-ring"></i> Update Variable-Pay Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-7-1">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Employee Id</th>
+                                        <th>Employee Name</th>
+                                        <th>Pay Code</th>
+                                        <th>Pay-Type Code</th>
+                                        <th>Amount</th>
+                                        <th>Fin Year</th>
+                                        <th>Fin Month</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Employee Id</th>
+                                        <th>Employee Name</th>
+                                        <th>Pay Code</th>
+                                        <th>PayTYPE Code</th>
+                                        <th>Amount</th>
+                                        <th>Fin Year</th>
+                                        <th>Fin Month</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>IT0000202001</td>
+                                        <td>Rajan Srivastava</td>
+                                        <td>BS002</td>
+                                        <td>S255001</td>
+                                        <td>10000</td>
+                                        <td>2019-20</td>
+                                        <td>May</td>
+                                        <td>Active</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>IT0000202002</td>
+                                        <td>Yashvant Srivastava</td>
+                                        <td>BS002</td>
+                                        <td>S255001</td>
+                                        <td>10000</td>
+                                        <td>2019-20</td>
+                                        <td>May</td>
+                                        <td>Active</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>IT0000202003</td>
+                                        <td>Ankur</td>
+                                        <td>BS002</td>
+                                        <td>S255001</td>
+                                        <td>10000</td>
+                                        <td>2019-20</td>
+                                        <td>May</td>
+                                        <td>Active</td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="tab-7-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ibox">
+                                        <div class="ibox-head">
+                                            <div class="ibox-title">Enter Fix-pay</div>
+                                        </div>
+                                        <div class="ibox-body">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-3 text-right">
+                                                    <h6>Select Employee :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <select matNativeControl id="mySelectId" class="form-control">
+                                                        <option value="" disabled selected></option>
+                                                        <option value="male">Rajan</option>
+                                                        <option value="female">Ankur</option>
+                                                        <option value="other">Rahul</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <h6>Pay Code :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-3 text-right">
+                                                    <h6>Paytype Code :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input class="form-control">
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <h6>Amount :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input  class="form-control">
+                                                </div>
+                                                
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-3 text-right">
+                                                    <h6>Fin Year :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <select matNativeControl id="mySelectId" class="form-control">
+                                                        <option value="" disabled selected></option>
+                                                        <option value="2018-19">2018-19</option>
+                                                        <option value="2019-20">2019-20</option>
+                                                        <option value="2020-21">2020-21</option>
+                                                        <option value="2021-22">2021-22</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <h6>Fin Month :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <select matNativeControl id="mySelectId" class="form-control">
+                                                        <option value="" disabled selected></option>
+                                                        <option value="1">April</option>
+                                                        <option value="2">May</option>
+                                                        <option value="3">June</option>
+                                                        <option value="4">July</option>
+                                                        <option value="5">August</option>
+                                                        <option value="6">September</option>
+                                                        <option value="7">October</option>
+                                                        <option value="8">Novemner</option>
+                                                        <option value="9">December</option>
+                                                        <option value="10">January</option>
+                                                        <option value="11">Febuary</option>
+                                                        <option value="12">March</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-12 text-center">
+                                                    <button class="btn btn-primary btn-fix">SUBMIT</button>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-7-3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ibox">
+                                        <div class="ibox-head">
+                                            <div class="ibox-title">Update Fix-pay</div>
+                                        </div>
+                                        <div class="ibox-body">
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-3 text-right">
+                                                    <h6>Select Employee :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <select matNativeControl id="mySelectId" class="form-control">
+                                                        <option value="" disabled selected></option>
+                                                        <option value="male">Rajan</option>
+                                                        <option value="female">Ankur</option>
+                                                        <option value="other">Rahul</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <h6>Pay Code :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input class="form-control">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-3 text-right">
+                                                    <h6>Paytype Code :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input class="form-control">
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <h6>Amount :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <input  class="form-control">
+                                                </div>
+                                                
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-3 text-right">
+                                                    <h6>Fin Year :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <select matNativeControl id="mySelectId" class="form-control">
+                                                        <option value="" disabled selected></option>
+                                                        <option value="2018-19">2018-19</option>
+                                                        <option value="2019-20">2019-20</option>
+                                                        <option value="2020-21">2020-21</option>
+                                                        <option value="2021-22">2021-22</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-3 text-right">
+                                                    <h6>Fin Month :</h6>
+                                                </div>
+                                                <div class="col-3">
+                                                    <select matNativeControl id="mySelectId" class="form-control">
+                                                        <option value="" disabled selected></option>
+                                                        <option value="1">April</option>
+                                                        <option value="2">May</option>
+                                                        <option value="3">June</option>
+                                                        <option value="4">July</option>
+                                                        <option value="5">August</option>
+                                                        <option value="6">September</option>
+                                                        <option value="7">October</option>
+                                                        <option value="8">Novemner</option>
+                                                        <option value="9">December</option>
+                                                        <option value="10">January</option>
+                                                        <option value="11">Febuary</option>
+                                                        <option value="12">March</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-12 text-center">
+                                                    <button class="btn btn-primary btn-fix">UPDATE</button>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

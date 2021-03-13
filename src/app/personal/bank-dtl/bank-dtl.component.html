@@ -1,0 +1,195 @@
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Bank Details</div>
+                </div>
+                <div class="ibox-body">
+                    <ul class="nav nav-tabs tabs-line">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i
+                                    class="fa fa-line-chart"></i> Bank List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-heartbeat"></i> Enter
+                                Bank Detail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-life-ring"></i> Update
+                                Bank Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-7-1">
+                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Employee Name</th>
+                                        <th>Bank Code</th>
+                                        <th>IFSC Code</th>
+                                        <th>Account No.</th>
+                                        <th>PF Account No.</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Employee Name</th>
+                                        <th>Bank Code</th>
+                                        <th>IFSC Code</th>
+                                        <th>Account No.</th>
+                                        <th>PF Account No.</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr *ngFor="let ob of data; let i = index">
+                                        <td>{{i+1}}</td>
+                                        <td>{{empObj[ob['emp_id']]}}</td>
+                                        <td>{{ob.bank_cd}}</td>
+                                        <td>{{ob.ifsc_cd}}</td>
+                                        <td>{{ob.bank_account_no}}</td>
+                                        <td>{{ob.pan_no}}</td>
+                                        <td>
+                                            <button class="btn btn-primary">More</button>
+                                            <button class="btn btn-warning" (click)="openUpdate(ob)">Update</button>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="tab-7-2">
+                            <br>
+                            <div class="row">
+                                <div class="col-3 text-right">
+                                    <h6>Select Employee :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <ng-select [items]="empdata" bindLabel="emp_first_name" bindValue="emp_id" [(ngModel)]="addbankObj['emp_id']">
+                                    </ng-select>
+                                    <!-- <select [(ngModel)]="addbankObj['emp_id']" id="mySelectId" class="form-control">
+                                        <option  value="" disabled selected></option>
+                                        <option *ngFor="let ob of empdata;" [ngValue]="ob.emp_id">{{ob.emp_first_name}} {{ob.emp_middle_name}} {{ob.emp_last_name}}</option>
+                                        
+                                    </select> -->
+                                </div>
+                                <div class="col-3 text-right">
+                                    <h6>Enter Bank Account No.</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" class="form-control" [(ngModel)]="addbankObj['bank_account_no']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3 text-right">
+                                    <h6>Enter Bank Code :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="addbankObj['bank_cd']">
+                                </div>
+
+                                <div class="col-3 text-right">
+                                    <h6>Enter IFSC Code :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="addbankObj['ifsc_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3 text-right">
+                                    <h6>Enter PF Account No.</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="addbankObj['pf_account_no']">
+                                </div>
+
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="submit()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+                        </div>
+                        <div class="tab-pane" id="tab-7-3">
+                            <br>
+                            <div class="row">
+                                <div class="col-3 text-right">
+                                    <h6>Select Employee :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <ng-select [items]="empdata" bindLabel="emp_first_name" bindValue="emp_id" [(ngModel)]="updateBankObj['emp_id']">
+                                    </ng-select>
+                                    <!-- <select [(ngModel)]="addbankObj['emp_id']" id="mySelectId" class="form-control">
+                                        <option  value="" disabled selected></option>
+                                        <option *ngFor="let ob of empdata;" [ngValue]="ob.emp_id">{{ob.emp_first_name}} {{ob.emp_middle_name}} {{ob.emp_last_name}}</option>
+                                        
+                                    </select> -->
+                                </div>
+                                <div class="col-3 text-right">
+                                    <h6>Enter Bank Account No.</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" class="form-control" [(ngModel)]="updateBankObj['bank_account_no']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3 text-right">
+                                    <h6>Enter Bank Code :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['bank_cd']">
+                                </div>
+
+                                <div class="col-3 text-right">
+                                    <h6>Enter IFSC Code :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['ifsc_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3 text-right">
+                                    <h6>Enter PF Account No.</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['pf_account_no']">
+                                </div>
+
+                            </div>
+                            <br>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="submit()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
