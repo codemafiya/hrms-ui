@@ -13,8 +13,8 @@ export class AllFixPayService {
     this.httpUrl = this.main.httpUrl+"/fix";
   }
   //hr
-  async  getFixPayMasterData() {
-    const resp = await this.http.get<any>(this.httpUrl+'/getfixpay').toPromise().then(res => {
+  async  getAllFixPay(selectedEmpId) {
+    const resp = await this.http.get<any>(this.httpUrl+'/getfixpay'+selectedEmpId).toPromise().then(res => {
       return res;
     });
     return resp;
@@ -25,6 +25,12 @@ export class AllFixPayService {
         return res;
       });
       return resp; 
+  }
+  async deleteFixPay(id){
+    var resp = await this.http.delete<any>(this.httpUrl+'/deleteFixPay'+id).toPromise().then(res=>{
+      return res;
+    })
+    return resp;
   }
   
 

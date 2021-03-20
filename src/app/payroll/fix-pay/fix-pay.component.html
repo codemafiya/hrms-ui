@@ -9,122 +9,151 @@
                     <ul class="nav nav-tabs tabs-line">
                         <li class="nav-item">
                             <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i
-                                    class="fa fa-line-chart"></i> Fix-Pay List</a>
+                                    class="fa fa-line-chart"></i> Fix Pay List</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-heartbeat"></i> Enter
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-plus"></i> Add
                                 Fix-Pay Detail</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-life-ring"></i> Update
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update
                                 Fix-Pay Detail</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-7-1">
-                            <table class="table table-striped table-bordered table-hover" id="example-table"
-                                cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Employee Name</th>
-                                        <th>Pay Code</th>
-                                        <th>Pay Type Code</th>
-                                        <th>Amount</th>
-                                        <th>Effective Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Employee Name</th>
-                                        <th>Pay Code</th>
-                                        <th>Pay Type Code</th>
-                                        <th>Amount</th>
-                                        <th>Effective Date</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    <tr *ngFor="let ob of data; let i = index">
-                                        <td>{{i+1}}</td>
-                                        <td>{{ob.emp_first_name}} {{ob.emp_middle_name}} {{ob.emp_last_name}}</td>
-                                        <td>{{ob.pay_cd}}</td>
-                                        <td>{{ob.pay_type_cd}}</td>
-                                        <td>{{ob.amount}}</td>
-                                        <td>{{ob.effective_dt}}</td>
-                                        <td>
-                                            <button class="btn btn-primary">More</button>
-                                            <button class="btn btn-warning">Update</button>
-                                        </td>
-                                    </tr>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Select Employee</p>
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="selectedEmpId" (change)="getFixpayinfo()">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-form-field style="margin-left: 2%">
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                            <div class="example-container">
 
-                                </tbody>
-                            </table>
+                                <table mat-table [dataSource]="datasource" matSort>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="emp_id">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> ID </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_id}} </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="emp_name">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Name </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_first_name}} {{element.emp_middle_name}} {{element.emp_last_name}} </td>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="pay_cd">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Pay Type </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.from_date}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="pay_type_cd">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> PAY/DED </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.pay_type_cd}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="amount">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Amount </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.amount}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="effective_start_dt">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Start Date </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.effective_start_dt}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="status">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Status </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.status}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="effective_end_dt">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> End Date </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.effective_end_dt}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
+                                            <button class="btn btn-primary">Update</button>
+                                            <button class="btn btn-danger" (click)="deleteFixPay(element)">Delete</button>
+
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
                         </div>
                         <div class="tab-pane" id="tab-7-2">
+                            <br>
                             <div class="row">
-                                <div class="col-md-12">
-
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-3 text-right">
-                                            <h6>Select Employee :</h6>
-                                        </div>
-                                        <div class="col-3">
-                                            <select [(ngModel)]="addfixpayObj['emp_id']" id="mySelectId" class="form-control">
-                                                <option  value="" disabled selected></option>
-                                                <option *ngFor="let ob of empdata;" [ngValue]="ob.emp_id">{{ob.emp_first_name}} {{ob.emp_middle_name}} {{ob.emp_last_name}}</option>
-                                                
-                                            </select>
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <h6>Pay Code :</h6>
-                                        </div>
-                                        <div class="col-3">
-                                            <input class="form-control" [(ngModel)]="addfixpayObj['pay_cd']">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-3 text-right">
-                                            <h6>Paytype Code :</h6>
-                                        </div>
-                                        <div class="col-3">
-                                            <input class="form-control" [(ngModel)]="addfixpayObj['pay_type_cd']">
-                                        </div>
-                                        <div class="col-3 text-right">
-                                            <h6>Amount :</h6>
-                                        </div>
-                                        <div class="col-3">
-                                            <input class="form-control" [(ngModel)]="addfixpayObj['amount']">
-                                        </div>
-
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-3 text-right">
-                                            <h6>Effective Date :</h6>
-                                        </div>
-                                        <div class="col-3">
-                                            <input type="date" class="form-control" [(ngModel)]="addfixpayObj['effective_dt']">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-12 text-center">
-                                            <button class="btn btn-primary" (click)="submit()">SUBMIT</button>
-                                        </div>
-
-                                    </div>
-                                    <br>
-
+                                <div class="col-3">
+                                    <p>Select Employee</p>
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="fixPayObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Select Pay Type</p>
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="text" [(ngModel)]="fixPayObj['pay_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Choose Payable/Deduction</p>
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="text" [(ngModel)]="fixPayObj['pay_type_cd']">
 
                                 </div>
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Choose Start Date</p>
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="date" [(ngModel)]="fixPayObj['effective_start_dt']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Enter Amount</p>
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="number" [(ngModel)]="fixPayObj['amount']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="submitFixPay()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
                         </div>
+
                         <div class="tab-pane fade" id="tab-7-3">
                             <div class="row">
                                 <div class="col-md-12">

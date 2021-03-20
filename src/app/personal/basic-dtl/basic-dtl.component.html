@@ -11,54 +11,76 @@
                             <a class="nav-link active" href="#tab-2-1" data-toggle="tab"><i class="fa fa-line-chart"></i> Employee List</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#tab-2-2" data-toggle="tab"><i class="fa fa-heartbeat"></i> Update Personal Info</a>
+                            <a class="nav-link" href="#tab-2-2" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update</a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-2-1">
-                            <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                                <thead>
-                                    <tr>
-                                        <th>SR NO</th>
-                                        <th>Emp Id</th>
-                                        <th>Emp Name</th>
-                                        <th>Pri Phone No</th>
-                                        <th>Comp Email</th>
-                                        <th>Gender</th>
-                                        <th>Personal Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>SR NO</th>
-                                        <th>Emp Id</th>
-                                        <th>Emp Name</th>
-                                        <th>Pri Phone No</th>
-                                        <th>Comp Email</th>
-                                        <th>Gender</th>
-                                        <th>Personal Email</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    <tr *ngFor="let ob of data; let i = index">
-                                        <td>{{i+1}}</td>
-                                        <td>{{ob.emp_id}}</td>
-                                        <td>{{ob.emp_first_name}} {{ob.emp_middle_name}} {{ob.emp_last_name}}</td>
-                                        <td>{{ob.emp_primary_phone_no}}</td>
-                                        <td>{{ob.emp_company_email}}</td>
-                                        <td>{{ob.emp_gender}}</td>
-                                        <td>{{ob.emp_personal_email}}</td>
-                                        <td>
-                                            <button class="btn btn-primary">More</button>
-                                            <button class="btn btn-warning">Update</button>
+                            <mat-form-field style="margin-left: 2%">
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                            <div class="example-container">
+
+                                <table mat-table [dataSource]="datasource" matSort>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="emp_id">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> ID </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_id}} </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="emp_name">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Name </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_first_name}} {{element.emp_middle_name}} {{element.emp_last_name}} </td>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="emp_primary_phone_no">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Phone No. </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_primary_phone_no}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="emp_personal_email">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Email </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_personal_email}}, {{element.emp_company_email}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="emp_gender">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Gender </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_gender}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="dob">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> DOB </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.dob}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="joining_date">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Joining Date </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.joining_date}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="offer_letter_no">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Offer Letter </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.offer_letter_no}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="status">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> status </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.status}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
+                                            <button class="btn btn-primary">Update</button>
+                                            <button class="btn btn-danger" (click)="deleteEmployee(element)">Delete</button>
+
                                         </td>
-                                    </tr>
+                                    </ng-container>
 
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
 
-                                </tbody>
-                            </table>
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
                         </div>
                         <div class="tab-pane" id="tab-2-2">
                             <div class="row">

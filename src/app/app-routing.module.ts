@@ -88,6 +88,16 @@ const routes: Routes = [
                         component: BankDtlComponent,
                     }
                 ]
+            },{
+                path:"professional",
+                component: ProfessionalComponent,
+                children:[
+                    {
+                        path: "posting",
+                        component: PostingComponent,
+                    },
+                    
+                ]
             },
             {
                 path:"joining",

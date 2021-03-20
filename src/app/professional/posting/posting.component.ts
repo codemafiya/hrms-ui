@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
+import { AllEmpService} from '../../service/all-emp.service';
+import { PostingService} from '../../service/posting.service';
 
+import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-posting',
   templateUrl: './posting.component.html',
@@ -7,9 +13,72 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private empservice:AllEmpService,private postingService : PostingService ) { }
+  data=[];
+ 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  datasource=new MatTableDataSource(this.data);
+  displayedColumns: string[] = ['emp_id', 'emp_name', 'from_date', 'to_date','department_cd','project_cd','work','role_cd','action'];
+  postObj={}
+  
+  async ngOnInit() {
+   
 
-  ngOnInit() {
+   
+    await this.getEmployeepersonalinfo();
+    await this.getAllPosting();
+    
+  }
+  allEmp = []
+  async getEmployeepersonalinfo(){
+
+    var resp = await this.empservice.getEmployeeMasterData();
+    console.log(resp);
+    if(resp['error']==false){
+      this.allEmp = resp.data;
+      for(var i=0;i<this.allEmp.length;i++){
+        this.allEmp[i]['name'] = this.allEmp[i]['emp_first_name']+" "+this.allEmp[i]['emp_last_name']
+      }
+     
+    }else{
+
+    }
+  }
+  async getAllPosting(){
+
+    var resp = await this.postingService.getAllPosting();
+    console.log(resp);
+    if(resp['error']==false){
+      this.data = resp.data;
+      
+      this.datasource = new MatTableDataSource(this.data)
+      this.datasource.paginator = this.paginator;
+      this.datasource.sort = this.sort;
+    }else{
+
+    }
+  }
+  async addPosting(){
+    console.log(this.postObj);
+    var resp = await this.postingService.addPosting(this.postObj);
+    if(resp['error'] == false){
+      await this.getAllPosting();
+      Swal.fire("Success","Posting Details Added","success");
+
+    }else{
+      Swal.fire("Oops","Error while adding posting details","error");
+    }
+  }
+  async deletePosting(element){
+    var resp = await this.postingService.deletePosting(element.id);
+    if(resp['error'] == false){
+      await this.getAllPosting();
+      Swal.fire("Success","Posting Details Deleted","success");
+
+    }else{
+      Swal.fire("Oops","Error while deleting posting details","error");
+    } 
   }
 
 }

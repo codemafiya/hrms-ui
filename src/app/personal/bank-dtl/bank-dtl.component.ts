@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AllBankdtlService } from "../../service/bank.service";
 import { AllEmpService} from '../../service/all-emp.service';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import swal from 'sweetalert2';
 declare var $: any;
 @Component({
@@ -12,11 +15,18 @@ export class BankDtlComponent implements OnInit {
 
   constructor(private bankservice:AllBankdtlService, private allempservice:AllEmpService ) { }
   data=[]
-  empdata=[]
+  
+ 
+ 
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+  datasource=new MatTableDataSource(this.data);
+  displayedColumns: string[] = ['emp_id', 'emp_name', 'emp_primary_phone_no', 'bank_cd','ifsc_cd','bank_account_no','pf_account_no','pan_no','action'];
+  
   addbankObj={}
   async ngOnInit() {
     await this.getBankDetailsinfo();
-    await this.getEmployeepersonalinfo();
+    // await this.getEmployeepersonalinfo();
     
   }
 
@@ -26,6 +36,9 @@ export class BankDtlComponent implements OnInit {
     console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
+      this.datasource = new MatTableDataSource(this.data)
+      this.datasource.paginator = this.paginator;
+      this.datasource.sort = this.sort;
     }else{
 
     }
@@ -50,19 +63,7 @@ export class BankDtlComponent implements OnInit {
     this.updateBankObj = Object.assign({},element);
     $('.nav-tabs a[href="#tab-7-3"]').tab('show')
   }
-  async getEmployeepersonalinfo(){
-
-    var resp = await this.allempservice.getEmployeeMasterData();
-    console.log(resp);
-    if(resp['error']==false){
-      this.empdata = resp.data;
-      for(var i=0;i<this.empdata.length;i++){
-        this.empObj[this.empdata[i]['emp_id']] = this.empdata[i]['emp_first_name']
-      }
-    }else{
-
-    }
-  } 
+ 
   
 
 }

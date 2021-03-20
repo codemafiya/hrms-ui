@@ -12,13 +12,12 @@ export class JoiningComponent implements OnInit {
   constructor(private joinService : JoiningService) { }
   joiningObj={}
   gender=[{code:'M',value:'MALE'},{code:'F',value:'FEMALE'}]
+  status=[{code:'A',value:'ACTIVE'},{code:'I',value:'INACTIVE'}]
   ngOnInit() {
   }
   async submit(){
-    console.log(this.joiningObj);
     var resp = await this.joinService.addJoining(this.joiningObj);
-    console.log(resp);
-    if(resp['error'] == true){
+    if(resp['error'] == false){
       swal.fire('Success...', 'Joining Complete!', 'success')
 
     }else{

@@ -5,6 +5,20 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 import { AppComponent } from './/app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LayoutModule } from './/layouts/layout.module';
@@ -32,6 +46,7 @@ import { EmpReportComponent } from './report/emp-report/emp-report.component';
 import { BillReportComponent } from './report/bill-report/bill-report.component';
 import { DedReportComponent } from './report/ded-report/ded-report.component';
 import { JoiningComponent } from './joining/joining.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -63,10 +78,24 @@ import { JoiningComponent } from './joining/joining.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatSortModule,
     NgSelectModule,
     LayoutModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [ScriptLoaderService],
   bootstrap: [AppComponent]
