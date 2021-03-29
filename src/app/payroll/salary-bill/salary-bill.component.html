@@ -1,3 +1,229 @@
-<p>
-  salary-bill works!
-</p>
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Salary Bill</div>
+                </div>
+                <div class="ibox-body">
+                    <ul class="nav nav-tabs tabs-line">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i
+                                  class="fa fa-line-chart"></i> Salary Bill List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-plus"></i> Create
+                              Salary Bill</a>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update Salary Bill
+                            </a>
+                        </li> -->
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-7-1">
+                            <br>
+
+                            <mat-form-field style="margin-left: 2%">
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                            <div class="example-container">
+
+                                <table mat-table [dataSource]="datasource" matSort>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Bill ID </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.id}} </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="bill_desc">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Bill Desc </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.bill_desc}} </td>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="bill_dt">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Bill Date </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.bill_dt}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="bill_amt">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Amount </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.bill_amt}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="bill_status">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Status </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.bill_status}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="year">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Year </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.year}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="month">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Month </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.month}} </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
+                                            <!-- <button class="btn btn-primary">Update</button> -->
+                                            <button class="btn btn-danger" (click)="deleteBill(element)">Delete</button>
+
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-7-2">
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Enter Bill Description :</p>
+                                </div>
+                                <div class="col-4">
+                                    <textarea class="form-control" [(ngModel)]="billObj['bill_desc']"></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Select Date :</p>
+                                </div>
+                                <div class="col-4">
+                                    <input type="date" class="form-control" [(ngModel)]="billObj['bill_dt']" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Select Year :</p>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" class="form-control" [(ngModel)]="billObj['year']" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Select Month :</p>
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="months" bindLabel="value" bindValue="code" [(ngModel)]="billObj['month']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Select Category :</p>
+                                </div>
+                                <div class="col-3">
+                                    <ng-select [items]="category" bindLabel="value" bindValue="code" [(ngModel)]="billObj['cat']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row" *ngIf="billObj['cat'] == 'IND'">
+                                <div class="col-3">
+                                    <p>Select Employee :</p>
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [multiple]="true" [(ngModel)]="billObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="createBill()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+                        </div>
+
+                        <!-- <div class="tab-pane fade" id="tab-7-3">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-3 text-right">
+                                            <h6>Select Employee :</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <select matNativeControl id="mySelectId" class="form-control">
+                                              <option value="" disabled selected></option>
+                                              <option value="male">Rajan</option>
+                                              <option value="female">Ankur</option>
+                                              <option value="other">Rahul</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-3 text-right">
+                                            <h6>Pay Code :</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <input class="form-control">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-3 text-right">
+                                            <h6>Paytype Code :</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <input class="form-control">
+                                        </div>
+                                        <div class="col-3 text-right">
+                                            <h6>Amount :</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <input class="form-control">
+                                        </div>
+
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-3 text-right">
+                                            <h6>Effective Date :</h6>
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="date" class="form-control">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <button class="btn btn-primary btn-fix">UPDATE</button>
+                                        </div>
+
+                                    </div>
+                                    <br>
+
+
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<!-- <mat-spinner *ngIf="resourcesLoaded === false" style="margin:0 auto;"></mat-spinner> -->

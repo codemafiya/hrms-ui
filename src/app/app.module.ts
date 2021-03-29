@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -37,6 +37,7 @@ import { LeaveApplicationComponent } from './professional/leave-application/leav
 import { RetirementComponent } from './professional/retirement/retirement.component';
 import { ResignComponent } from './professional/resign/resign.component';
 import { TransferComponent } from './professional/transfer/transfer.component';
+import {PayrollComponent} from './payroll/payroll.component'
 import { FixPayComponent } from './payroll/fix-pay/fix-pay.component';
 import { VariablePayComponent } from './payroll/variable-pay/variable-pay.component';
 import { SalaryBillComponent } from './payroll/salary-bill/salary-bill.component';
@@ -47,6 +48,9 @@ import { BillReportComponent } from './report/bill-report/bill-report.component'
 import { DedReportComponent } from './report/ded-report/ded-report.component';
 import { JoiningComponent } from './joining/joining.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MasterDataComponent } from './master-data/master-data.component';
+import { PayComponent } from './master-data/pay/pay.component';
+import { LeaveRuleComponent } from './master-data/leave-rule/leave-rule.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PersonalComponent,
     BasicDtlComponent,
     BankDtlComponent,
+    PayrollComponent,
     ProfessionalComponent,
     EstablishmentComponent,
     PostingComponent,
@@ -74,10 +79,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BillReportComponent,
     DedReportComponent,
     JoiningComponent,
+    MasterDataComponent,
+    PayComponent,
+    LeaveRuleComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatProgressSpinnerModule,
     MatTableModule,
     MatCheckboxModule,
     MatSlideToggleModule,
