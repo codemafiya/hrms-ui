@@ -44,6 +44,9 @@ export class BankDtlComponent implements OnInit {
     }
   }
 
+  applyFilter(filterValue: string) {
+    this.datasource.filter = filterValue.trim().toLowerCase();
+  }
   async submit(){
     console.log(this.addbankObj);
     var resp = await this.bankservice.addBankdtl(this.addbankObj);

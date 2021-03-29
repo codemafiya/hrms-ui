@@ -80,5 +80,8 @@ export class FixPayComponent implements OnInit {
 
     }
   } 
+  applyFilter(filterValue: string) {
+    this.datasource.filter = filterValue.trim().toLowerCase();
+  }
 
 }

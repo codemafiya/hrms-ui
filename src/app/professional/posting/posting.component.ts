@@ -80,5 +80,8 @@ export class PostingComponent implements OnInit {
       Swal.fire("Oops","Error while deleting posting details","error");
     } 
   }
+  applyFilter(filterValue: string) {
+    this.datasource.filter = filterValue.trim().toLowerCase();
+  }
 
 }

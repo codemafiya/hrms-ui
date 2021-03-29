@@ -120,5 +120,8 @@ export class SalaryBillComponent implements OnInit {
 
     }
   } 
+  applyFilter(filterValue: string) {
+    this.datasource.filter = filterValue.trim().toLowerCase();
+  }
 
 }
