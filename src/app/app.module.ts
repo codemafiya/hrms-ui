@@ -51,6 +51,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MasterDataComponent } from './master-data/master-data.component';
 import { PayComponent } from './master-data/pay/pay.component';
 import { LeaveRuleComponent } from './master-data/leave-rule/leave-rule.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { LeaveRuleComponent } from './master-data/leave-rule/leave-rule.componen
     MasterDataComponent,
     PayComponent,
     LeaveRuleComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

@@ -27,6 +27,7 @@ import { TransferComponent } from './professional/transfer/transfer.component';
 import { FixPayComponent } from './payroll/fix-pay/fix-pay.component';
 import { VariablePayComponent } from './payroll/variable-pay/variable-pay.component';
 import {PayrollComponent} from './payroll/payroll.component'
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { SalaryBillComponent } from './payroll/salary-bill/salary-bill.component';
 import { LoanComponent } from './payroll/loan/loan.component';
@@ -139,6 +140,11 @@ const routes: Routes = [
             {
                 path:"joining",
                 component: JoiningComponent
+
+            },
+            {
+                path:"index",
+                component: DashboardComponent
 
             },
             
