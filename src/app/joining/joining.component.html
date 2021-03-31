@@ -8,122 +8,65 @@
                 <div class="ibox-body">
                     <br>
                     <div class="row">
-                        <div class="col-3">
-                            <p>What is first name ?</p>
-                        </div>
                         <div class="col-4">
+                            <label>First Name</label>
                             <input class="form-control" [(ngModel)]="joiningObj['emp_first_name']">
                         </div>
-
-                    </div>
-                    <br>
-                    <div class="row">
-
-                        <div class="col-3">
-                            <p>Middle Name (If Any) (Optional)</p>
-                        </div>
                         <div class="col-4">
+                            <label>Middle Name</label>
                             <input class="form-control" [(ngModel)]="joiningObj['emp_middle_name']">
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p>What is Last Name ?</p>
-                        </div>
                         <div class="col-4">
+                            <label>Last Name</label>
                             <input class="form-control" [(ngModel)]="joiningObj['emp_last_name']">
                         </div>
 
-
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-3">
-                            <p>Personal Email Address</p>
-                        </div>
                         <div class="col-4">
+                            <label>Personal Email Address</label>
                             <input class="form-control" [(ngModel)]="joiningObj['emp_personal_email']">
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p>Personal Phone No :</p>
-                        </div>
                         <div class="col-4">
+                            <label>Personal Phone No</label>
                             <input type="number" class="form-control" [(ngModel)]="joiningObj['emp_primary_phone_no']">
                         </div>
-
-
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p>Gender</p>
-                        </div>
                         <div class="col-4">
+                            <label>Gender</label>
                             <ng-select [items]="gender" bindLabel="value" bindValue="code" [(ngModel)]="joiningObj['emp_gender']">
                             </ng-select>
 
                         </div>
                     </div>
-
                     <br>
                     <div class="row">
-                        <div class="col-3">
-                            <p>Date of Birth</p>
-                        </div>
                         <div class="col-4">
+                            <label>Date of Birth</label>
                             <input type="date" class="form-control" [(ngModel)]="joiningObj['dob']">
-
-
-                        </div>
-                    </div>
-
-                    <br>
-                    <div class="row">
-
-                        <div class="col-3">
-                            <p>Offer/Joining Letter No :</p>
                         </div>
                         <div class="col-4">
+                            <label>Offer/Joining Letter No</label>
                             <input class="form-control" [(ngModel)]="joiningObj['offer_letter_no']">
                         </div>
-
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p>Joining Date :</p>
-                        </div>
                         <div class="col-4">
+                            <label>Joining Date</label>
                             <input type="date" class="form-control" [(ngModel)]="joiningObj['joining_date']">
                         </div>
                     </div>
-
                     <br>
                     <div class="row">
-
-                        <div class="col-3">
-                            <p>Father Name :</p>
-                        </div>
                         <div class="col-4">
+                            <label>Father Name</label>
                             <input type="text" class="form-control" [(ngModel)]="joiningObj['emp_father_name']">
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p>Choose Status</p>
-                        </div>
                         <div class="col-4">
+                            <label>Choose Status</label>
                             <ng-select [items]="status" bindLabel="value" bindValue="code" [(ngModel)]="joiningObj['status']">
                             </ng-select>
 
                         </div>
                     </div>
-
                     <br>
                     <div class="row">
                         <div class="col-12 text-center">
