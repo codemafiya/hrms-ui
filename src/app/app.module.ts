@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -18,6 +18,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
 
 import { AppComponent } from './/app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -52,6 +56,10 @@ import { MasterDataComponent } from './master-data/master-data.component';
 import { PayComponent } from './master-data/pay/pay.component';
 import { LeaveRuleComponent } from './master-data/leave-rule/leave-rule.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {RegisterComponent} from './pages/register/register.component';
+import {LoginComponent} from './pages/login/login.component';
+
+import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -59,8 +67,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PersonalComponent,
     BasicDtlComponent,
     BankDtlComponent,
+    RegisterComponent,
     PayrollComponent,
     ProfessionalComponent,
+    ForgotPasswordComponent,
+    LoginComponent,
     EstablishmentComponent,
     PostingComponent,
     AttendanceComponent,
@@ -89,6 +100,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserModule,
     AppRoutingModule,
     MatProgressSpinnerModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatCheckboxModule,
     MatSlideToggleModule,

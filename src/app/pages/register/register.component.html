@@ -1,50 +1,92 @@
 <div class="content">
     <div class="brand">
-        <a class="link" routerLink="/index">AdminCAST</a>
+        <a class="link">
+            <img src="./assets/img/logo.png">
+
+        </a>
     </div>
-    <form id="register-form" action="javascript:;" method="post">
-        <h2 class="login-title">Sign Up</h2>
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="first_name" placeholder="First Name">
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group">
-                    <input class="form-control" type="text" name="last_name" placeholder="Last Name">
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <h6>Enter Email</h6>
         </div>
-        <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
+        <div class="col-6">
+            <input class="form-control" [(ngModel)]="accountObj['email']">
         </div>
-        <div class="form-group">
-            <input class="form-control" id="password" type="password" name="password" placeholder="Password">
+    </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <h6>Enter Phone No</h6>
         </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password_confirmation" placeholder="Confirm Password">
+        <div class="col-6">
+            <input class="form-control" [(ngModel)]="accountObj['phone_no']">
         </div>
-        <div class="form-group text-left">
-            <label class="ui-checkbox ui-checkbox-info">
-                <input type="checkbox" name="agree">
-                <span class="input-span"></span>I agree the terms and policy</label>
+    </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <h6>Enter Password</h6>
         </div>
-        <div class="form-group">
-            <button class="btn btn-info btn-block" type="submit">Sign up</button>
+        <div class="col-6">
+            <input class="form-control" [(ngModel)]="accountObj['password']">
         </div>
-        <div class="social-auth-hr">
-            <span>Or Sign up with</span>
+    </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <h6>Confirm Password</h6>
         </div>
-        <div class="text-center social-auth m-b-20">
-            <a class="btn btn-social-icon btn-twitter m-r-5" href="javascript:;"><i class="fa fa-twitter"></i></a>
-            <a class="btn btn-social-icon btn-facebook m-r-5" href="javascript:;"><i class="fa fa-facebook"></i></a>
-            <a class="btn btn-social-icon btn-google m-r-5" href="javascript:;"><i class="fa fa-google-plus"></i></a>
-            <a class="btn btn-social-icon btn-linkedin m-r-5" href="javascript:;"><i class="fa fa-linkedin"></i></a>
-            <a class="btn btn-social-icon btn-vk" href="javascript:;"><i class="fa fa-vk"></i></a>
+        <div class="col-6">
+            <input class="form-control" [(ngModel)]="accountObj['confirm_password']">
         </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <h6>Enter Organisation Short Name</h6>
+        </div>
+        <div class="col-6">
+            <input class="form-control" [(ngModel)]="accountObj['short_name']">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <h6>Enter Organisation Full Name</h6>
+        </div>
+        <div class="col-6">
+            <input class="form-control" [(ngModel)]="accountObj['full_name']">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-right">
+            <h6>Enter Industry Type</h6>
+        </div>
+        <div class="col-6">
+            <input class="form-control" [(ngModel)]="accountObj['ind_type']">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <button class="btn btn-primary" (click)="createAccount()">Submit</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <button class="btn btn-link">Forgot Password ?</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <button class="btn btn-link" [routerLink]="['/login']" routerLinkActive="router-link-active">Login Here ?</button>
+        </div>
+
+    </div>
+
+
+    <!-- <div id="register-form">
+
+
+
         <div class="text-center">Already a member?
             <a class="color-blue" routerLink="/login">Login here</a>
         </div>
-    </form>
+    </div> -->
 </div>

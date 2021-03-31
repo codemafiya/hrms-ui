@@ -1,6 +1,6 @@
 <div class="content">
     <div class="brand">
-        <a class="link" routerLink="/index">
+        <a class="link">
             <img src="./assets/img/logo.png">
         </a>
     </div>
@@ -9,13 +9,13 @@
         <div class="form-group">
             <div class="input-group-icon right">
                 <div class="input-icon"><i class="fa fa-envelope"></i></div>
-                <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off">
+                <input class="form-control" type="email" name="email" placeholder="Email" autocomplete="off" [(ngModel)]="loginObj['email']">
             </div>
         </div>
         <div class="form-group">
             <div class="input-group-icon right">
                 <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password" [(ngModel)]="loginObj['password']">
             </div>
         </div>
         <div class="form-group d-flex justify-content-between">
@@ -25,7 +25,7 @@
             <a routerLink="/forgot_password">Forgot password?</a>
         </div>
         <div class="form-group">
-            <button class="btn btn-info btn-block" type="submit">Login</button>
+            <button class="btn btn-info btn-block" type="submit" (click)="login()">Login</button>
         </div>
         <!-- <div class="social-auth-hr">
             <span>Or login with</span>

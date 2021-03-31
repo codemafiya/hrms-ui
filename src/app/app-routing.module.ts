@@ -180,15 +180,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-   
-    
-    ProfileComponent,
-    LoginComponent,
-    RegisterComponent,
-    ForgotPasswordComponent,
-    
-  ],
+  
   imports: [ RouterModule.forRoot(routes, {useHash: true}) ],
   exports: [ 
     RouterModule,

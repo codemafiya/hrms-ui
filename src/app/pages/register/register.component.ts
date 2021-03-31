@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-
+import Swal from 'sweetalert2';
+import {AuthService} from '../../service/auth.service';
 declare var $:any;
 
 @Component({
@@ -7,49 +8,28 @@ declare var $:any;
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit, AfterViewInit, OnDestroy {
+export class RegisterComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private authService : AuthService) { }
+  accountObj={}
   ngOnInit() {
     $('body').addClass('empty-layout bg-silver-300');
   }
 
-  ngAfterViewInit() {
-    $('#register-form').validate({
-        errorClass: "help-block",
-        rules: {
-            first_name: {
-                required: true,
-                minlength: 2
-            },
-            last_name: {
-                required: true,
-                minlength: 2
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            'password': {
-                required: true,
-                confirmed: true
-            },
-            password_confirmation: {
-                equalTo: 'password'
-            }
-        },
-        highlight: function(e) {
-            $(e).closest(".form-group").addClass("has-error")
-        },
-        unhighlight: function(e) {
-            $(e).closest(".form-group").removeClass("has-error")
-        },
-    });
-  }
 
-  ngOnDestroy() {
-    $('body').removeClass('empty-layout bg-silver-300');
+
+  
+  async createAccount(){
+
+    console.log(this.accountObj);
+    var resp = await this.authService.createAccount(this.accountObj);
+    if(resp['error'] == false){
+      Swal.fire("Success","Account Created Successfully","success")
+
+    }else{
+      Swal.fire("Oops","Error Occurred during creating Account","error")
+    }
+
   }
 
 }
