@@ -1,6 +1,7 @@
 import { Component, OnInit ,ViewChild} from '@angular/core';
 import { AllEmpService} from '../../service/all-emp.service';
 import { PostingService} from '../../service/posting.service';
+import {MainService} from '../../service/main.service';
 
 import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class PostingComponent implements OnInit {
 
-  constructor(private empservice:AllEmpService,private postingService : PostingService ) { }
+  constructor(public mainService: MainService,private empservice:AllEmpService,private postingService : PostingService ) { }
   data=[];
  
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -32,8 +33,9 @@ export class PostingComponent implements OnInit {
   }
   allEmp = []
   async getEmployeepersonalinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.empservice.getEmployeeMasterData();
+    var resp = await this.empservice.getEmployeeMasterData(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.allEmp = resp.data;
@@ -46,8 +48,9 @@ export class PostingComponent implements OnInit {
     }
   }
   async getAllPosting(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.postingService.getAllPosting();
+    var resp = await this.postingService.getAllPosting(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
@@ -61,6 +64,7 @@ export class PostingComponent implements OnInit {
   }
   async addPosting(){
     console.log(this.postObj);
+    this.postObj['acct_id'] = this.mainService.acct_id;
     var resp = await this.postingService.addPosting(this.postObj);
     if(resp['error'] == false){
       await this.getAllPosting();
@@ -71,7 +75,9 @@ export class PostingComponent implements OnInit {
     }
   }
   async deletePosting(element){
-    var resp = await this.postingService.deletePosting(element.id);
+    var obj = {acct_id : this.mainService.acct_id,id : element.id};
+
+    var resp = await this.postingService.deletePosting(JSON.stringify(obj));
     if(resp['error'] == false){
       await this.getAllPosting();
       Swal.fire("Success","Posting Details Deleted","success");

@@ -17,8 +17,8 @@ export class PostingService {
     this.httpUrl = this.main.httpUrl+"/post";
   }
   //hr
-  async  getAllPosting() {
-    const resp = await this.http.get<any>(this.httpUrl+'/getAllPosting').toPromise().then(res => {
+  async  getAllPosting(obj) {
+    const resp = await this.http.get<any>(this.httpUrl+'/getAllPosting'+obj).toPromise().then(res => {
       return res;
     });
     return resp;

@@ -5,6 +5,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import swal from 'sweetalert2';
+import {MainService} from '../../service/main.service';
+
 @Component({
   selector: 'app-variable-pay',
   templateUrl: './variable-pay.component.html',
@@ -12,7 +14,7 @@ import swal from 'sweetalert2';
 })
 export class VariablePayComponent implements OnInit {
 
-  constructor(private varPayService: VariablePayService, private allempservice:AllEmpService) { }
+  constructor(public mainService: MainService,private varPayService: VariablePayService, private allempservice:AllEmpService) { }
   data = []
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -30,8 +32,9 @@ export class VariablePayComponent implements OnInit {
 
   }
   async getVarpayinfo(){
+    var obj = {acct_id : this.mainService.acct_id,emp_id : this.selectedEmpId};
 
-    var resp = await this.varPayService.getAllVarPay(this.selectedEmpId);
+    var resp = await this.varPayService.getAllVarPay(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
@@ -44,6 +47,7 @@ export class VariablePayComponent implements OnInit {
   }
   
   async submitVarPay(){
+    this.variablPayObj['acct_id'] = this.mainService.acct_id;
     var resp = await this.varPayService.addVarpay(this.variablPayObj);
     console.log(resp);
     if(resp['error'] == false){
@@ -55,7 +59,9 @@ export class VariablePayComponent implements OnInit {
     }
   }
   async deleteVarPay(element){
-    var resp  = await this.varPayService.deleteVarPay(element.id);
+    var obj = {acct_id : this.mainService.acct_id,id : element.id};
+
+    var resp  = await this.varPayService.deleteVarPay(JSON.stringify(obj));
     if(resp['error'] == false){
       await this.getVarpayinfo()
       swal.fire('Success...', 'Variable Pay Deleted Successfully!', 'success');
@@ -67,8 +73,9 @@ export class VariablePayComponent implements OnInit {
     }
   }
   async getEmployeepersonalinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.allempservice.getEmployeeMasterData();
+    var resp = await this.allempservice.getEmployeeMasterData(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.allEmp = resp.data;

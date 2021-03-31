@@ -13,8 +13,8 @@ export class BillService {
   constructor(private http: HttpClient, private main: MainService) { 
     this.httpUrl = this.main.httpUrl+"/bill";
   }
-  async getAllBill(){
-      const resp = await  this.http.get<any>(this.httpUrl+'/getAllBill').toPromise().then(res=>{
+  async getAllBill(obj){
+      const resp = await  this.http.get<any>(this.httpUrl+'/getAllBill'+obj).toPromise().then(res=>{
           return res;
 
       })
@@ -41,8 +41,8 @@ export class BillService {
     })
     return resp;
   }
-  async getAllFixPay(){
-    const resp = await  this.http.get<any>(this.httpUrl+'/getAllFixPay').toPromise().then(res=>{
+  async getAllFixPay(obj){
+    const resp = await  this.http.get<any>(this.httpUrl+'/getAllFixPay'+obj).toPromise().then(res=>{
         return res;
 
     })

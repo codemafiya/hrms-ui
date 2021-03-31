@@ -5,6 +5,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import swal from 'sweetalert2';
+import {MainService} from '../../service/main.service';
+
 declare var $: any;
 @Component({
   selector: 'app-bank-dtl',
@@ -13,7 +15,7 @@ declare var $: any;
 })
 export class BankDtlComponent implements OnInit {
 
-  constructor(private bankservice:AllBankdtlService, private allempservice:AllEmpService ) { }
+  constructor(public mainService : MainService,private bankservice:AllBankdtlService, private allempservice:AllEmpService ) { }
   data=[]
   
  
@@ -31,8 +33,9 @@ export class BankDtlComponent implements OnInit {
   }
 
   async getBankDetailsinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.bankservice.getBankdtlMasterData();
+    var resp = await this.bankservice.getBankdtlMasterData(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
@@ -49,6 +52,7 @@ export class BankDtlComponent implements OnInit {
   }
   async submit(){
     console.log(this.addbankObj);
+    this.addbankObj['acct_id']=this.mainService.acct_id;
     var resp = await this.bankservice.addBankdtl(this.addbankObj);
     console.log(resp);
     if(resp['error'] == false){

@@ -14,8 +14,8 @@ export class AllEmpService {
     this.httpUrl = this.main.httpUrl+"/personal";
   }
   //hr
-  async  getEmployeeMasterData() {
-    const resp = await this.http.get<any>(this.httpUrl+'/getAllEmployees').toPromise().then(res => {
+  async  getEmployeeMasterData(obj) {
+    const resp = await this.http.get<any>(this.httpUrl+'/getAllEmployees'+obj).toPromise().then(res => {
       return res;
     });
     return resp;

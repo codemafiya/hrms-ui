@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import swal from 'sweetalert2';
+import {MainService} from '../../service/main.service';
 
 @Component({
   selector: 'app-fix-pay',
@@ -13,7 +14,7 @@ import swal from 'sweetalert2';
 })
 export class FixPayComponent implements OnInit {
 
-  constructor(private fixpayservice: AllFixPayService, private allempservice:AllEmpService) { }
+  constructor(public mainService: MainService,private fixpayservice: AllFixPayService, private allempservice:AllEmpService) { }
   data = []
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -30,8 +31,9 @@ export class FixPayComponent implements OnInit {
 
   }
   async getFixpayinfo(){
+    var obj = {acct_id : this.mainService.acct_id,emp_id : this.selectedEmpId};
 
-    var resp = await this.fixpayservice.getAllFixPay(this.selectedEmpId);
+    var resp = await this.fixpayservice.getAllFixPay(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
@@ -45,6 +47,7 @@ export class FixPayComponent implements OnInit {
   
   async submitFixPay(){
     console.log(this.fixPayObj);
+    this.fixPayObj['acct_id'] = this.mainService.acct_id;
     var resp = await this.fixpayservice.addFixpay(this.fixPayObj);
     console.log(resp);
     if(resp['error'] == false){
@@ -56,7 +59,9 @@ export class FixPayComponent implements OnInit {
     }
   }
   async deleteFixPay(element){
-    var resp  = await this.fixpayservice.deleteFixPay(element.id);
+    var obj = {acct_id : this.mainService.acct_id,id : element.id};
+
+    var resp  = await this.fixpayservice.deleteFixPay(JSON.stringify(obj));
     if(resp['error'] == false){
       await this.getFixpayinfo()
       swal.fire('Success...', 'Fix Pay Deleted Successfully!', 'success');
@@ -68,8 +73,9 @@ export class FixPayComponent implements OnInit {
     }
   }
   async getEmployeepersonalinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.allempservice.getEmployeeMasterData();
+    var resp = await this.allempservice.getEmployeeMasterData(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.allEmp = resp.data;

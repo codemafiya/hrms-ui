@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { element } from 'protractor';
 import Swal from 'sweetalert2';
+import {MainService} from '../../service/main.service';
 
 @Component({
   selector: 'app-basic-dtl',
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class BasicDtlComponent implements OnInit {
 
-  constructor(private empservice:AllEmpService ) { }
+  constructor(public mainService : MainService,private empservice:AllEmpService ) { }
   data=[];
  
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -31,8 +32,9 @@ export class BasicDtlComponent implements OnInit {
   }
 
   async getEmployeepersonalinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.empservice.getEmployeeMasterData();
+    var resp = await this.empservice.getEmployeeMasterData(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
@@ -45,7 +47,9 @@ export class BasicDtlComponent implements OnInit {
     }
   }
   async deleteEmployee(element){
-    var resp = await this.empservice.deleteEmployee(element.emp_id);
+    var obj = {acct_id : this.mainService.acct_id,emp_id : element.emp_id};
+    console.log(obj)
+    var resp = await this.empservice.deleteEmployee(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       Swal.fire("Success","Employee Delete Successfully",'success');

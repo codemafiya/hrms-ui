@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import {AuthService} from '../../service/auth.service';
 import {Router} from '@angular/router';
 declare var $:any;
-
+import {MainService} from '../../service/main.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +11,7 @@ declare var $:any;
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor(private authService : AuthService,private router : Router) { }
+  constructor(public mainService: MainService,private authService : AuthService,private router : Router) { }
   loginObj={};
   ngOnInit() {
     $('body').addClass('empty-layout bg-silver-300');
@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     if(resp['error'] == false){
       var userData = resp['data'][0];
       localStorage.setItem("techErpUser",JSON.stringify(userData));
+      this.mainService.userInfo = userData;
+			this.mainService.acct_id = userData['acct_id']
       this.router.navigate(['/index']);
       Swal.fire("Success","Login Successfull","success");
 

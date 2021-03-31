@@ -14,8 +14,8 @@ export class AllBankdtlService {
     this.httpUrl = this.main.httpUrl+"/bank";
   }
   //hr
-  async  getBankdtlMasterData() {
-    const resp = await this.http.get<any>(this.httpUrl+'/getallbank').toPromise().then(res => {
+  async  getBankdtlMasterData(obj) {
+    const resp = await this.http.get<any>(this.httpUrl+'/getallbank'+obj).toPromise().then(res => {
       return res;
     });
     return resp;

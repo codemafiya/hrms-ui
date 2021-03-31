@@ -6,6 +6,8 @@ import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import swal from 'sweetalert2';
+import {MainService} from '../../service/main.service';
+
 @Component({
   selector: 'app-salary-bill',
   templateUrl: './salary-bill.component.html',
@@ -13,7 +15,7 @@ import swal from 'sweetalert2';
 })
 export class SalaryBillComponent implements OnInit {
 
-  constructor(private billService : BillService,private fixpayservice: AllFixPayService, private allempservice:AllEmpService) { }
+  constructor(public mainService : MainService,private billService : BillService,private fixpayservice: AllFixPayService, private allempservice:AllEmpService) { }
   data = []
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -32,7 +34,9 @@ export class SalaryBillComponent implements OnInit {
 
   }
   async getAllBill(){
-    var resp = await this.billService.getAllBill();
+    var obj = {acct_id : this.mainService.acct_id};
+
+    var resp = await this.billService.getAllBill(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
@@ -45,8 +49,9 @@ export class SalaryBillComponent implements OnInit {
   }
   allFixPay=[]
   async getFixpayinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.billService.getAllFixPay();
+    var resp = await this.billService.getAllFixPay(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.allFixPay = resp.data;
@@ -66,6 +71,7 @@ export class SalaryBillComponent implements OnInit {
     this.billObj['bill_type'] = "S";
     this.billObj['bill_status'] = "G";
     this.billObj['data'] = [];
+    this.billObj['acct_id'] = this.mainService.acct_id;
     var fx = [];
     if(this.billObj['cat']=='IND'){
       for(var i=0;i<this.allFixPay.length;i++){
@@ -96,7 +102,9 @@ export class SalaryBillComponent implements OnInit {
     }
   }
   async deleteBill(element){
-    var resp  = await this.billService.deleteBill(element.id);
+    var obj = {acct_id : this.mainService.acct_id,id : element.id};
+
+    var resp  = await this.billService.deleteBill(JSON.stringify(obj));
     if(resp['error'] == false){
       await this.getAllBill()
       swal.fire('Success...', 'Bill Deleted Successfully!', 'success');
@@ -108,8 +116,9 @@ export class SalaryBillComponent implements OnInit {
     }
   }
   async getEmployeepersonalinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.allempservice.getEmployeeMasterData();
+    var resp = await this.allempservice.getEmployeeMasterData(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
       this.allEmp = resp.data;
