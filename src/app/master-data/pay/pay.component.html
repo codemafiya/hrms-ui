@@ -1,1 +1,122 @@
-<p>pay works!</p>
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Pay Rule</div>
+                </div>
+                <div class="ibox-body">
+                    <ul class="nav nav-tabs tabs-line">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i
+                                    class="fa fa-line-chart"></i>Pay List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-plus"></i> Add
+                                Pay Detail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update
+                                Pay Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-7-1">
+                            <br>
+
+                            <br>
+                            <mat-form-field style="margin-left: 2%">
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                            <div class="example-container">
+
+                                <table mat-table [dataSource]="datasource" matSort>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="id">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> ID </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.id}} </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="pay_cd">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Pay Code </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.pay_cd}} {{element.emp_middle_name}} {{element.emp_last_name}} </td>
+                                    </ng-container>
+
+
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="pay_type_cd">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> PAY/DED </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.pay_type_cd}} </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="status">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Status </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.status}} </td>
+                                    </ng-container>
+
+
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
+                                            <button class="btn btn-primary">Update</button>
+                                            <button class="btn btn-danger" (click)="deletePay(element)">Delete</button>
+
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-7-2">
+
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Enter Pay Code</p>
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="text" [(ngModel)]="payObj['pay_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>Enter Payable/Deduction</p>
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" type="text" [(ngModel)]="payObj['pay_type_cd']">
+
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="submitPay()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+                        </div>
+
+                        <div class="tab-pane fade" id="tab-7-3">
+
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

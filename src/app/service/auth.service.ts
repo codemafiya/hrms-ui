@@ -26,6 +26,18 @@ export class AuthService {
       });
       return resp;
   }
+  async updateProfile(obj){
+    const resp = await this.http.put<any>(this.httpUrl+'/users/updateUserInfo',obj).toPromise().then(res => {
+        return res;
+      });
+      return resp;
+  }
+  async updatePassword(obj){
+    const resp = await this.http.put<any>(this.httpUrl+'/users/changePassword',obj).toPromise().then(res => {
+        return res;
+      });
+      return resp;
+  }
   async  getEmployeeMasterData() {
     const resp = await this.http.get<any>(this.httpUrl+'/getAllEmployees').toPromise().then(res => {
       return res;
