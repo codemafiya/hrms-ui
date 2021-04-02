@@ -13,9 +13,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-plus"></i> Add
                                 Bank Detail</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update
+                                Bank Detail</a>
+                        </li>
+
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-7-1">
@@ -84,7 +89,60 @@
                         </div>
                         <div class="tab-pane" id="tab-7-2">
                             <br>
-
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Employee :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="addbankObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Bank Account No :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="addbankObj['bank_account_no']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter IFSC :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="addbankObj['ifsc_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Bank :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="addbankObj['bank_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter PF Account No :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="addbankObj['pf_account_no']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter PAN :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="addbankObj['pan_no']">
+                                </div>
+                            </div>
                             <br>
                             <div class="row">
                                 <div class="col-12 text-center">

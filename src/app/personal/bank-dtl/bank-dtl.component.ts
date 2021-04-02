@@ -27,6 +27,7 @@ export class BankDtlComponent implements OnInit {
   
   addbankObj={}
   async ngOnInit() {
+    await this.getEmployeepersonalinfo()
     await this.getBankDetailsinfo();
     // await this.getEmployeepersonalinfo();
     
@@ -57,7 +58,7 @@ export class BankDtlComponent implements OnInit {
     console.log(resp);
     if(resp['error'] == false){
       await this.getBankDetailsinfo();
-      swal.fire('Success...', 'Bank Details Save Successfully!', 'success')
+      swal.fire('Success...', 'Bank Details Added Successfully!', 'success')
 
     }else{
       swal.fire('Oops...', 'Something went wrong!', 'error')
@@ -70,6 +71,21 @@ export class BankDtlComponent implements OnInit {
     this.updateBankObj = Object.assign({},element);
     $('.nav-tabs a[href="#tab-7-3"]').tab('show')
   }
+  allEmp=[]
+  async getEmployeepersonalinfo(){
+    var obj = {acct_id : this.mainService.acct_id};
+
+    var resp = await this.allempservice.getEmployeeMasterData(JSON.stringify(obj));
+    console.log(resp);
+    if(resp['error']==false){
+      this.allEmp = resp.data;
+      for(var i=0;i<this.allEmp.length;i++){
+        this.allEmp[i]['name'] = this.allEmp[i]['emp_id']+" - "+this.allEmp[i]['emp_first_name']+" "+this.allEmp[i]['emp_last_name']
+      }
+    }else{
+
+    }
+  } 
  
   
 
