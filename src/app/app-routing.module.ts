@@ -39,6 +39,8 @@ import { JoiningComponent } from './joining/joining.component';
 import { MasterDataComponent } from './master-data/master-data.component';
 import { PayComponent } from './master-data/pay/pay.component';
 import { LeaveRuleComponent } from './master-data/leave-rule/leave-rule.component';
+import { CodeValueComponent } from './master-data/code-value/code-value.component';
+
 const routes: Routes = [
     {path: '', redirectTo: 'index', pathMatch: 'full'},
     {
@@ -105,6 +107,12 @@ const routes: Routes = [
                     {
                         path:"leave-rule",
                         component: LeaveRuleComponent
+        
+        
+                    },
+                    {
+                        path:"code-value",
+                        component: CodeValueComponent
         
         
                     },

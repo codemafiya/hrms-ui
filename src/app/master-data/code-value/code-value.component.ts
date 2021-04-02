@@ -6,32 +6,45 @@ import { MatSort } from '@angular/material/sort';
 import swal from 'sweetalert2';
 import {MainService} from '../../service/main.service';
 @Component({
-  selector: 'app-leave-rule',
-  templateUrl: './leave-rule.component.html',
-  styleUrls: ['./leave-rule.component.css']
+  selector: 'app-code-value',
+  templateUrl: './code-value.component.html',
+  styleUrls: ['./code-value.component.css']
 })
-export class LeaveRuleComponent implements OnInit {
+export class CodeValueComponent implements OnInit {
 
   constructor(public mainService: MainService,private masterDataService: MasterDataService) { }
   data = []
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   datasource=new MatTableDataSource(this.data);
-  displayedColumns: string[] = ['id','leave_cd', 'leave_name', 'leave_period','no_of_leaves', 'status','action'];
+  displayedColumns: string[] = ['id','field_name', 'code', 'value', 'status','action'];
   
  
-  allLeaveRules=[]
-  leaveRuleObj = {}
+  allCodeValue=[]
+  codeValueObj = {}
+  fields=[]
   async ngOnInit() {
-    await this.getLeaveRules();
+    await this.getCodeValue();
+    await this.getFields()
     
 
   }
+  async getFields(){
+    
 
-  async getLeaveRules(){
+    var resp = await this.masterDataService.getFields();
+    console.log(resp);
+    if(resp['error']==false){
+      this.fields = resp.data;
+      
+    }else{
+
+    }
+  }
+  async getCodeValue(){
     var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.masterDataService.getLeaveRule(JSON.stringify(obj));
+    var resp = await this.masterDataService.getCodeValue(JSON.stringify(obj));
     if(resp['error']==false){
       this.data = resp.data;
       this.datasource = new MatTableDataSource(this.data)
@@ -42,25 +55,25 @@ export class LeaveRuleComponent implements OnInit {
     }
   }
   
-  async submitLeaveRule(){
-    this.leaveRuleObj['acct_id'] = this.mainService.acct_id;
-    var resp = await this.masterDataService.createLeaveRule(this.leaveRuleObj);
+  async submitCodeValue(){
+    this.codeValueObj['acct_id'] = this.mainService.acct_id;
+    var resp = await this.masterDataService.createCodeValue(this.codeValueObj);
     if(resp['error'] == false){
-      await this.getLeaveRules()
-      swal.fire('Success...', 'Leave Rule Added Successfully!', 'success')
+      await this.getCodeValue()
+      swal.fire('Success...', 'Code Value Added Successfully!', 'success')
 
     }else{
       swal.fire('Oops...', 'Something went wrong!', 'error')
 
     }
   }
-  async deleteLeaveRule(element){
+  async deleteCodeValue(element){
     var obj = {acct_id : this.mainService.acct_id,id : element.id};
 
-    var resp  = await this.masterDataService.deleteLeaveRule(JSON.stringify(obj));
+    var resp  = await this.masterDataService.deleteCodeValue(JSON.stringify(obj));
     if(resp['error'] == false){
-      await this.getLeaveRules()
-      swal.fire('Success...', 'Leave Rule Deleted Successfully!', 'success');
+      await this.getCodeValue()
+      swal.fire('Success...', 'Code Value Deleted Successfully!', 'success');
 
 
     }else{

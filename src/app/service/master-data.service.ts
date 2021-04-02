@@ -64,5 +64,35 @@ export class MasterDataService {
       });
       return resp;
   }
+  async getFields(){
+    const resp = await this.http.get<any>(this.httpUrl+'/codeValue/getFields').toPromise().then(res => {
+        return res;
+      });
+      return resp;
+  }
+  async createLeaveRule(obj){
+    const resp = await this.http.post<any>(this.httpUrl+'/leaveRule/createLeaveRule',obj).toPromise().then(res => {
+        return res;
+      });
+      return resp;
+  }
+  async updateLeaveRule(obj){
+    const resp = await this.http.put<any>(this.httpUrl+'/leaveRule/updateLeaveRule',obj).toPromise().then(res => {
+        return res;
+      });
+      return resp;
+  }
+  async getLeaveRule(obj){
+    const resp = await this.http.get<any>(this.httpUrl+'/leaveRule/getLeaveRule'+obj).toPromise().then(res => {
+        return res;
+      });
+      return resp;
+  }
+  async deleteLeaveRule(obj){
+    const resp = await this.http.delete<any>(this.httpUrl+'/leaveRule/deleteLeaveRule'+obj).toPromise().then(res => {
+        return res;
+      });
+      return resp;
+  }
 
 }

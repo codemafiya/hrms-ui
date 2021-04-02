@@ -3,21 +3,21 @@
         <div class="col-md-12">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">Leave Rule</div>
+                    <div class="ibox-title">Code Value</div>
                 </div>
                 <div class="ibox-body">
                     <ul class="nav nav-tabs tabs-line">
                         <li class="nav-item">
                             <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i
-                                    class="fa fa-line-chart"></i>Leave Rule List</a>
+                                    class="fa fa-line-chart"></i>Code Value List</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-plus"></i> Add
-                                Leave Rule</a>
+                                Code Value</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update
-                                Leave Rule</a>
+                                Code Value</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -38,28 +38,23 @@
                                         <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.id}} </td>
                                     </ng-container>
 
-                                    <ng-container matColumnDef="leave_cd">
-                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Leave Code </th>
-                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.leave_cd}} </td>
+                                    <ng-container matColumnDef="field_name">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Field </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.field_name}} </td>
                                     </ng-container>
 
                                     <!-- Name Column -->
-                                    <ng-container matColumnDef="leave_name">
-                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Leave Name </th>
-                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.leave_name}} </td>
+                                    <ng-container matColumnDef="code">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Code </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.code}} </td>
                                     </ng-container>
 
 
 
                                     <!-- Symbol Column -->
-                                    <ng-container matColumnDef="leave_period">
-                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Period </th>
-                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.leave_period}} </td>
-                                    </ng-container>
-
-                                    <ng-container matColumnDef="no_of_leaves">
-                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> No Of Leaves </th>
-                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.no_of_leaves}} </td>
+                                    <ng-container matColumnDef="value">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Value </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.value}} </td>
                                     </ng-container>
 
 
@@ -73,7 +68,7 @@
                                         <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
                                         <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
                                             <button class="btn btn-primary">Update</button>
-                                            <button class="btn btn-danger" (click)="deleteLeaveRule(element)">Delete</button>
+                                            <button class="btn btn-danger" (click)="deleteCodeValue(element)">Delete</button>
 
                                         </td>
                                     </ng-container>
@@ -90,38 +85,29 @@
                             <br>
                             <div class="row">
                                 <div class="col-3">
-                                    <p>Enter Leave Code</p>
+                                    <p>Select Fields</p>
                                 </div>
                                 <div class="col-4">
-                                    <input class="form-control" [(ngModel)]="leaveRuleObj['leave_cd']">
+                                    <ng-select [items]="fields" bindLabel="field_name" bindValue="field_cd" [(ngModel)]="codeValueObj['field_cd']">
+                                    </ng-select>
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-3">
-                                    <p>Enter Leave Name</p>
+                                    <p>Enter Code</p>
                                 </div>
                                 <div class="col-4">
-                                    <input class="form-control" [(ngModel)]="leaveRuleObj['leave_name']">
-
+                                    <input class="form-control" type="text" [(ngModel)]="codeValueObj['code']">
                                 </div>
                             </div>
                             <br>
                             <div class="row">
                                 <div class="col-3">
-                                    <p>Enter Leave Period</p>
+                                    <p>Enter Value</p>
                                 </div>
                                 <div class="col-4">
-                                    <input class="form-control" type="text" [(ngModel)]="leaveRuleObj['leave_period']">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col-3">
-                                    <p>Enter No Of Leaves</p>
-                                </div>
-                                <div class="col-4">
-                                    <input class="form-control" type="text" [(ngModel)]="leaveRuleObj['no_of_leaves']">
+                                    <input class="form-control" type="text" [(ngModel)]="codeValueObj['value']">
 
                                 </div>
                             </div>
@@ -129,7 +115,7 @@
 
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <button class="btn btn-primary" (click)="submitLeaveRule()">SUBMIT</button>
+                                    <button class="btn btn-primary" (click)="submitCodeValue()">SUBMIT</button>
                                 </div>
 
                             </div>
