@@ -71,7 +71,7 @@
                                     <ng-container matColumnDef="action">
                                         <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
                                         <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
-                                            <!-- <button class="btn btn-primary">Update</button> -->
+                                            <button class="btn btn-primary" (click)="printBill(element)">Print</button>
                                             <button class="btn btn-danger" (click)="deleteBill(element)">Delete</button>
 
                                         </td>

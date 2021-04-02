@@ -1,0 +1,37 @@
+.example-container {
+    max-height: 720px;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-row:nth-child(even) {
+    background-color: rgb(238, 224, 226);
+}
+
+.mat-row:nth-child(odd) {
+    background-color: white;
+}
+
+.mat-cell {
+    padding: 5px 10px 5px 0;
+    color: black;
+}
+
+.mat-header-cell {
+    padding: 5px 10px 5px 0;
+    background-color: white;
+    color: brown;
+    text-align: center;
+}
+
+.mat-paginator {
+    color: blue;
+}
+
+.transparent .mat-dialog-container {
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.0);
+}
