@@ -3,10 +3,9 @@ import { AllEmpService} from '../../service/all-emp.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { element } from 'protractor';
 import Swal from 'sweetalert2';
 import {MainService} from '../../service/main.service';
-
+declare var $ : any
 @Component({
   selector: 'app-basic-dtl',
   templateUrl: './basic-dtl.component.html',
@@ -21,7 +20,7 @@ export class BasicDtlComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   datasource=new MatTableDataSource(this.data);
   displayedColumns: string[] = ['emp_id', 'emp_name', 'emp_primary_phone_no', 'emp_personal_email','emp_gender','dob','joining_date','offer_letter_no','status','action'];
-  
+  empObj={}
   
   async ngOnInit() {
    
@@ -60,6 +59,24 @@ export class BasicDtlComponent implements OnInit {
   }
   applyFilter(filterValue: string) {
     this.datasource.filter = filterValue.trim().toLowerCase();
+  }
+  openUpdate(element){
+    this.empObj = Object.assign({},element);
+    $('.nav-tabs a[href="#tab-2-2"]').tab('show');
+
+
+  }
+  async updateInfo(){
+    //console.log(this.empObj)
+    this.empObj['acct_id'] = this.mainService.acct_id;
+    var resp = await this.empservice.updateEmployeeMasterData(this.empObj);
+    if(resp['error'] == false){
+      await this.getEmployeepersonalinfo();
+      Swal.fire("Success","Updated Successfully","success")
+    }else{
+      Swal.fire("Oops","Error while Updating Record","error")
+
+    }
   }
 
 }

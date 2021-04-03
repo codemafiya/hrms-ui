@@ -69,7 +69,7 @@
                                     <ng-container matColumnDef="action">
                                         <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
                                         <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
-                                            <button class="btn btn-primary">Update</button>
+                                            <button class="btn btn-primary" (click)="openUpdate(element)">Update</button>
                                             <button class="btn btn-danger" (click)="deleteEmployee(element)">Delete</button>
 
                                         </td>
@@ -83,241 +83,279 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="tab-2-2">
+
+                            <br>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="ibox">
-                                        <div class="ibox-head">
-                                            <div class="ibox-title">Update Personal Info</div>
-                                        </div>
-                                        <div class="ibox-body">
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Select Employee :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <select matNativeControl id="mySelectId" class="form-control">
-                                                      <option value="">-Select Employee-</option>
-                                                      <option value="male">Rajan</option>
-                                                      <option value="female">Ankur</option>
-                                                      <option value="other">Rahul</option>
-                                                  </select>
-                                                </div>
+                                <div class="col-12 text-center">
+                                    Employee ID : {{empObj['emp_id']}}
+                                </div>
+                            </div>
 
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>First Name :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Middle Name :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input class="form-control">
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Last Name :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Primary Phone No. :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="number" class="form-control">
-                                                </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4">
+                                    <hr style="color: black;">
+                                </div>
+                                <div class="col-4 text-center">
+                                    <h6>Personal Info</h6>
+                                </div>
+                                <div class="col-4">
+                                    <hr style="color: black;">
+                                </div>
+                            </div>
+                            <br>
 
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Secondary Phone No :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Primary Email:</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control">
-                                                </div>
 
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Company Email:</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Father's Name</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control">
-                                                </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>First Name :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="empObj['emp_first_name']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Middle Name :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="empObj['emp_middle_name']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Last Name :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" [(ngModel)]="empObj['emp_last_name']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Primary Phone No. :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="number" class="form-control" [(ngModel)]="empObj['emp_primary_phone_no']">
+                                </div>
 
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Husband Name :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="texy" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Nationality :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control">
-                                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Secondary Phone No :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_secondary_phone_no']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Primary Email:</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_personal_email']">
+                                </div>
 
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Permanent State :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" ng-model="per.state" ng-change="per_Address && update()" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Temprary State :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control" ng-model="temp.state" ng-disabled="per_Address" />
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Permanent District :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" ng-model="per.district" ng-change="per_Address && update()" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Temprary District :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control" ng-model="temp.district" ng-disabled="per_Address" />
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Permanent Address Line 1 :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" ng-model="per.addressline1" ng-change="per_Address && update()" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Temprary Address Line 1 :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control" ng-model="temp.addressline1" ng-disabled="per_Address" />
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Permanent Address Line 2 :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" ng-model="per.addressline2" ng-change="per_Address && update()" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Temprary Address Line 2 :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control" ng-model="temp.addressline2" ng-disabled="per_Address" />
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Permanent Zip Code :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" ng-model="per.zip" ng-change="per_Address && update()" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Temprary Zip Code :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control" ng-model="temp.zip" ng-disabled="per_Address" />
-                                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Company Email:</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_company_email']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Father's Name</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_father_name']">
+                                </div>
 
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Gender:</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <select matNativeControl id="mySelectId" class="form-control">
-                                          <option value="">-Select Gender-</option>
-                                          <option value="male">Male</option>
-                                          <option value="female">Female</option>
-                                          <option value="other">Other</option>
-                                      </select>
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Marital Status :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <select matNativeControl id="mySelectId" class="form-control">
-                                          <option value="">-Select Marital Status-</option>
-                            <option value="Single">Single</option>
-                            <option value="Married">Married</option>
-                            <option value="Widowed">Widowed</option>
-                            <option value="Separated">Separated</option>
-                            <option value="Divorced">Divorced</option>
-                                      </select>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-3 text-right">
-                                                    <h6>Offer/Joining Letter No :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="col-3 text-right">
-                                                    <h6>Joining Date :</h6>
-                                                </div>
-                                                <div class="col-3">
-                                                    <input type="date" class="form-control">
-                                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Husband Name/Wife Name :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="texy" class="form-control" [(ngModel)]="empObj['emp_husband_name']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Nationality :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_nationality']">
+                                </div>
 
-                                            </div>
-                                            <br>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Gender:</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_gender']">
 
-                                            <br>
-                                            <div class="row">
-                                                <div class="col-12 text-center">
-                                                    <button class="btn btn-primary btn-fix">SUBMIT</button>
-                                                </div>
-
-                                            </div>
-                                            <br>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <h6>Marital Status :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['marital_status']">
 
                                 </div>
                             </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Offer/Joining Letter No :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['offer_letter_no']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Joining Date :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="date" class="form-control" [(ngModel)]="empObj['joining_date']">
+                                </div>
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Date Of Birth :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['dob']">
+                                </div>
+
+
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4">
+                                    <hr style="color: black;">
+                                </div>
+                                <div class="col-4 text-center">
+                                    <h6>Permanent Address</h6>
+                                </div>
+                                <div class="col-4">
+                                    <hr style="color: black;">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>State :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_per_state']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>District :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_per_district']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Address Line 1 :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_per_address_line1']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Address Line 2 :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_per_address_line2']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Zip Code :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_per_zip_cd']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Landmark :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_per_landmark']" />
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4">
+                                    <hr style="color: black;">
+                                </div>
+                                <div class="col-4 text-center">
+                                    <h6>Local Address</h6>
+                                </div>
+                                <div class="col-4">
+                                    <hr style="color: black;">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>State :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_temp_state']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>District :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_temp_district']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Address Line 1 :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_temp_address_line1']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Address Line 2 :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_temp_address_line2']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h6>Zip Code :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_temp_zip_cd']">
+                                </div>
+                                <div class="col-3">
+                                    <h6>Landmark :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" [(ngModel)]="empObj['emp_temp_landmark']" />
+                                </div>
+                            </div>
+                            <br>
+
+
+
+
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="updateInfo()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+
                         </div>
 
                     </div>

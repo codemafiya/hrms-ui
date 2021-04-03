@@ -26,6 +26,7 @@ export class BankDtlComponent implements OnInit {
   displayedColumns: string[] = ['emp_id', 'emp_name', 'emp_primary_phone_no', 'bank_cd','ifsc_cd','bank_account_no','pf_account_no','pan_no','action'];
   
   addbankObj={}
+  updateBankObj={}
   async ngOnInit() {
     await this.getEmployeepersonalinfo()
     await this.getBankDetailsinfo();
@@ -37,7 +38,6 @@ export class BankDtlComponent implements OnInit {
     var obj = {acct_id : this.mainService.acct_id};
 
     var resp = await this.bankservice.getBankdtlMasterData(JSON.stringify(obj));
-    console.log(resp);
     if(resp['error']==false){
       this.data = resp.data;
       this.datasource = new MatTableDataSource(this.data)
@@ -52,10 +52,8 @@ export class BankDtlComponent implements OnInit {
     this.datasource.filter = filterValue.trim().toLowerCase();
   }
   async submit(){
-    console.log(this.addbankObj);
     this.addbankObj['acct_id']=this.mainService.acct_id;
     var resp = await this.bankservice.addBankdtl(this.addbankObj);
-    console.log(resp);
     if(resp['error'] == false){
       await this.getBankDetailsinfo();
       swal.fire('Success...', 'Bank Details Added Successfully!', 'success')
@@ -66,7 +64,6 @@ export class BankDtlComponent implements OnInit {
     }
   }
   empObj={};
-  updateBankObj={}
   openUpdate(element){
     this.updateBankObj = Object.assign({},element);
     $('.nav-tabs a[href="#tab-7-3"]').tab('show')
@@ -76,7 +73,6 @@ export class BankDtlComponent implements OnInit {
     var obj = {acct_id : this.mainService.acct_id};
 
     var resp = await this.allempservice.getEmployeeMasterData(JSON.stringify(obj));
-    console.log(resp);
     if(resp['error']==false){
       this.allEmp = resp.data;
       for(var i=0;i<this.allEmp.length;i++){
@@ -86,6 +82,17 @@ export class BankDtlComponent implements OnInit {
 
     }
   } 
+  async update(){
+    this.updateBankObj['acct_id'] = this.mainService.acct_id;
+    var resp = await this.bankservice.udateBankdtl(this.updateBankObj);
+    if(resp['error'] == false){
+      await this.getBankDetailsinfo();
+      swal.fire("Success","Updated Successfully","success")
+    }else{
+      swal.fire("Oops","Error while Updating Record","error")
+
+    } 
+  }
  
   
 

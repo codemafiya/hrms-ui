@@ -74,7 +74,7 @@
                                     <ng-container matColumnDef="action">
                                         <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
                                         <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
-                                            <button class="btn btn-primary">Update</button>
+                                            <button class="btn btn-primary" (click)="openUpdate(element)">Update</button>
 
 
                                         </td>
@@ -147,6 +147,73 @@
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <button class="btn btn-primary" (click)="submit()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+                        </div>
+                        <div class="tab-pane" id="tab-7-3">
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Employee :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="updateBankObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Bank Account No :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['bank_account_no']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter IFSC :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['ifsc_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Bank :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['bank_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter PF Account No :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['pf_account_no']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter PAN :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="updateBankObj['pan_no']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="update()">SUBMIT</button>
                                 </div>
 
                             </div>
