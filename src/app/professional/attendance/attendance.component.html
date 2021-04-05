@@ -1,3 +1,296 @@
-<p>
-  attendance works!
-</p>
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Attendance Details</div>
+                </div>
+                <div class="ibox-body">
+                    <ul class="nav nav-tabs tabs-line">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i
+                                  class="fa fa-line-chart"></i> Attendance List</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-plus"></i> Add
+                              Attendance Detail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update
+                              Attendance Detail</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-7-1">
+                            <br>
+                            <div class="row">
+                                <div class="col-3 text-right">
+                                    <h6> Select Date :</h6>
+                                </div>
+                                <div class="col-3">
+                                    <input class="form-control" type="date" [(ngModel)]="attendance['dt']">
+                                </div>
+                                <div class="col-3">
+                                    <button class="btn btn-primary" (click)="getAllAttendance()">Submit</button>
+                                </div>
+                            </div>
+                            <br>
+                            <mat-form-field style="margin-left: 2%">
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                            <div class="example-container">
+
+                                <table mat-table [dataSource]="datasource" matSort>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="emp_id">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> ID </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_id}} </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="emp_name">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Name </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_first_name}} {{element.emp_middle_name}} {{element.emp_last_name}} </td>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="dt">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Date </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.dt}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="arr_time">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Arrival Time </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.arr_time}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="dep_time">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Departure Time </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.dep_time}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="is_short_leave">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Is Short Leave </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.is_short_leave}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="emp_reason">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Reason </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_reason}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="mgr_comm">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Manager Comm. </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.mgr_comm}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="salary_ded">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Salary Ded </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.salary_ded}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
+                                            <button class="btn btn-danger" (click)="deleteAttendance(element)">Delete</button>
+
+                                            <button class="btn btn-primary" (click)="openUpdate(element)">Update</button>
+
+
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-7-2">
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Employee :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="addAttendanceObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Date :
+                                </div>
+                                <div class="col-4">
+                                    <input type="date" class="form-control" [(ngModel)]="addAttendanceObj['dt']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Arrival Time :
+                                </div>
+                                <div class="col-4">
+                                    <input type="time" class="form-control" [(ngModel)]="addAttendanceObj['arr_time']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Departure Time :
+                                </div>
+                                <div class="col-4">
+                                    <input type="time" class="form-control" [(ngModel)]="addAttendanceObj['dep_time']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Employee Reason :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="addAttendanceObj['emp_reason']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Manager Comm :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="addAttendanceObj['mgr_comm']">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Is Short Leave :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="ques" bindLabel="value" bindValue="code" [(ngModel)]="addAttendanceObj['is_short_leave']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Salary Deduction Applicable :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="ques" bindLabel="value" bindValue="code" [(ngModel)]="addAttendanceObj['salary_ded']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="submit()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+                        </div>
+                        <div class="tab-pane" id="tab-7-3">
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Employee :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="updateAttendanceObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Date :
+                                </div>
+                                <div class="col-4">
+                                    <input type="date" class="form-control" [(ngModel)]="updateAttendanceObj['dt']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Arrival Time :
+                                </div>
+                                <div class="col-4">
+                                    <input type="time" class="form-control" [(ngModel)]="updateAttendanceObj['arr_time']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Departure Time :
+                                </div>
+                                <div class="col-4">
+                                    <input type="time" class="form-control" [(ngModel)]="updateAttendanceObj['dep_time']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Employee Reason :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="updateAttendanceObj['emp_reason']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Enter Manager Comm :
+                                </div>
+                                <div class="col-4">
+                                    <input class="form-control" [(ngModel)]="updateAttendanceObj['mgr_comm']">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Is Short Leave :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="ques" bindLabel="value" bindValue="code" [(ngModel)]="updateAttendanceObj['is_short_leave']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Salary Deduction Applicable :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="ques" bindLabel="value" bindValue="code" [(ngModel)]="updateAttendanceObj['salary_ded']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="update()">UPDATE</button>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+                        </div>
+
+
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

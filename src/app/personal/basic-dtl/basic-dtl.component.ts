@@ -51,6 +51,7 @@ export class BasicDtlComponent implements OnInit {
     var resp = await this.empservice.deleteEmployee(JSON.stringify(obj));
     console.log(resp);
     if(resp['error']==false){
+      await this.getEmployeepersonalinfo();
       Swal.fire("Success","Employee Delete Successfully",'success');
     }else{
       Swal.fire("Oops","Error in deleting employee",'error');

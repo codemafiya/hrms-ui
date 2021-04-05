@@ -69,6 +69,14 @@ const routes: Routes = [
                         path: "posting",
                         component: PostingComponent,
                     },
+                    {
+                        path: "attendance",
+                        component: AttendanceComponent,
+                    },
+                    {
+                        path: "establishment",
+                        component: EstablishmentComponent,
+                    },
                     
                 ]
             },
