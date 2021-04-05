@@ -66,7 +66,6 @@ export class EstablishmentComponent implements OnInit {
   }
   openUpdate(element){
     this.updateEstablishmentObj = Object.assign({},element);
-    this.updateEstablishmentObj['dt'] = this.updateEstablishmentObj['dt'].split('T')[0]
     $('.nav-tabs a[href="#tab-7-3"]').tab('show')
   }
   allEmp=[]
