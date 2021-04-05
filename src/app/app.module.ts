@@ -58,8 +58,9 @@ import { LeaveRuleComponent } from './master-data/leave-rule/leave-rule.componen
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {RegisterComponent} from './pages/register/register.component';
 import {LoginComponent} from './pages/login/login.component';
-
+import {ProfileComponent} from './pages/profile/profile.component';
 import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.component';
+import { CodeValueComponent } from './master-data/code-value/code-value.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.c
     ProfessionalComponent,
     ForgotPasswordComponent,
     LoginComponent,
+    ProfileComponent,
     EstablishmentComponent,
     PostingComponent,
     AttendanceComponent,
@@ -95,6 +97,7 @@ import {ForgotPasswordComponent} from './pages/forgot-password/forgot-password.c
     PayComponent,
     LeaveRuleComponent,
     DashboardComponent,
+    CodeValueComponent,
   ],
   imports: [
     BrowserModule,

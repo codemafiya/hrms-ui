@@ -2,74 +2,61 @@
     <div class="brand">
         <a class="link">
             <img src="./assets/img/logo.png">
-
         </a>
     </div>
-    <div class="row">
-        <div class="col-6 text-right">
-            <h6>Enter Email</h6>
+    <div style="background-color: #fff; padding: 15px 20px 20px 20px;">
+        <h2 class="login-title">Register</h2>
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                <input class="form-control" placeholder="Enter Email" [(ngModel)]="accountObj['email']">
+            </div>
         </div>
-        <div class="col-6">
-            <input class="form-control" [(ngModel)]="accountObj['email']">
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-phone"></i></div>
+                <input class="form-control" placeholder="Enter Phone No" [(ngModel)]="accountObj['phone_no']">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-6 text-right">
-            <h6>Enter Phone No</h6>
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
+                <input class="form-control" type="password" placeholder="Enter Password
+    " [(ngModel)]="accountObj['password']">
+            </div>
         </div>
-        <div class="col-6">
-            <input class="form-control" [(ngModel)]="accountObj['phone_no']">
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-lock font-16"></i></div>
+                <input class="form-control" type="password" placeholder="Confirm Password
+    " [(ngModel)]="accountObj['confirm_password']">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-6 text-right">
-            <h6>Enter Password</h6>
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-industry"></i></div>
+                <input class="form-control" placeholder="Enter Organisation Short Name
+    " [(ngModel)]="accountObj['short_name']">
+            </div>
         </div>
-        <div class="col-6">
-            <input class="form-control" [(ngModel)]="accountObj['password']">
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-industry"></i></div>
+                <input class="form-control" placeholder="Enter Organisation Full Name
+    " [(ngModel)]="accountObj['full_name']">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-6 text-right">
-            <h6>Confirm Password</h6>
+        <div class="form-group">
+            <div class="input-group-icon right">
+                <div class="input-icon"><i class="fa fa-industry"></i></div>
+                <input class="form-control" placeholder="Enter Industry Type
+    " [(ngModel)]="accountObj['ind_type']">
+            </div>
         </div>
-        <div class="col-6">
-            <input class="form-control" [(ngModel)]="accountObj['confirm_password']">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 text-right">
-            <h6>Enter Organisation Short Name</h6>
-        </div>
-        <div class="col-6">
-            <input class="form-control" [(ngModel)]="accountObj['short_name']">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 text-right">
-            <h6>Enter Organisation Full Name</h6>
-        </div>
-        <div class="col-6">
-            <input class="form-control" [(ngModel)]="accountObj['full_name']">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6 text-right">
-            <h6>Enter Industry Type</h6>
-        </div>
-        <div class="col-6">
-            <input class="form-control" [(ngModel)]="accountObj['ind_type']">
-        </div>
-    </div>
+        
     <div class="row">
         <div class="col-12 text-center">
             <button class="btn btn-primary" (click)="createAccount()">Submit</button>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <button class="btn btn-link">Forgot Password ?</button>
         </div>
 
     </div>
@@ -80,7 +67,7 @@
 
     </div>
 
-
+    </div>
     <!-- <div id="register-form">
 
 

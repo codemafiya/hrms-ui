@@ -1,1 +1,69 @@
-<p>dashboard works!</p>
+<div class="page-content fade-in-up">
+
+    <div class="row">
+
+        <div class="col-3">
+            <div class="card">
+                <div style="color:cadetblue;" class="card-header">
+                    Employee
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Total Employee : {{totalEmp}}</h5>
+                    <p class="card-text">Active Employee : {{activeEmp}}</p>
+
+
+                    <a href="#" class="btn btn-primary">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div style="color :cornflowerblue" class="card-header">
+                    Attendance
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Absent Today : {{absentEmp}}</h5>
+                    <p class="card-text">Short Leave Today : {{lateEmp}}</p>
+                    <a href="#" class="btn btn-primary">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div style="color:blue;" class="card-header">
+                    Salary/Expenses
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">This Month Salary : {{thisMonthSalary}}</h5>
+                    <p class="card-text">Total Salary Expense : {{totalSalary}}</p>
+                    <a href="#" class="btn btn-primary">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card">
+                <div style="color: brown;" class="card-header">
+                    Teams
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Current Teams : {{currentTeams}}</h5>
+                    <p class="card-text">All Teams : {{allTeams}}</p>
+                    <a href="#" class="btn btn-primary">View All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div style="color:cadetblue;" class="card-header">
+                    Employee vs Designation
+                </div>
+                <div class="card-body">
+                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

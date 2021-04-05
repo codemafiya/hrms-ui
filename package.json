@@ -48,6 +48,7 @@
     "metismenu": "2.7.1",
     "moment": "^2.20.1",
     "morris.js": "^0.5.0",
+    "pdfmake": "^0.1.70",
     "popper.js": "^1.12.9",
     "raphael": "^2.2.7",
     "rxjs": "^6.6.3",

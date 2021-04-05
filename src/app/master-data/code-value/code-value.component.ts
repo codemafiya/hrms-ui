@@ -6,31 +6,45 @@ import { MatSort } from '@angular/material/sort';
 import swal from 'sweetalert2';
 import {MainService} from '../../service/main.service';
 @Component({
-  selector: 'app-pay',
-  templateUrl: './pay.component.html',
-  styleUrls: ['./pay.component.css']
+  selector: 'app-code-value',
+  templateUrl: './code-value.component.html',
+  styleUrls: ['./code-value.component.css']
 })
-export class PayComponent implements OnInit {
+export class CodeValueComponent implements OnInit {
 
   constructor(public mainService: MainService,private masterDataService: MasterDataService) { }
   data = []
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   datasource=new MatTableDataSource(this.data);
-  displayedColumns: string[] = ['id', 'pay_cd', 'pay_type_cd', 'status','action'];
+  displayedColumns: string[] = ['id','field_name', 'code', 'value', 'status','action'];
   
  
-  allPay=[]
-  payObj = {}
+  allCodeValue=[]
+  codeValueObj = {}
+  fields=[]
   async ngOnInit() {
-    await this.getAllPay();
+    await this.getCodeValue();
+    await this.getFields()
     
 
   }
-  async getAllPay(){
+  async getFields(){
+    
+
+    var resp = await this.masterDataService.getFields();
+    console.log(resp);
+    if(resp['error']==false){
+      this.fields = resp.data;
+      
+    }else{
+
+    }
+  }
+  async getCodeValue(){
     var obj = {acct_id : this.mainService.acct_id};
 
-    var resp = await this.masterDataService.getPay(JSON.stringify(obj));
+    var resp = await this.masterDataService.getCodeValue(JSON.stringify(obj));
     if(resp['error']==false){
       this.data = resp.data;
       this.datasource = new MatTableDataSource(this.data)
@@ -41,25 +55,25 @@ export class PayComponent implements OnInit {
     }
   }
   
-  async submitPay(){
-    this.payObj['acct_id'] = this.mainService.acct_id;
-    var resp = await this.masterDataService.createPay(this.payObj);
+  async submitCodeValue(){
+    this.codeValueObj['acct_id'] = this.mainService.acct_id;
+    var resp = await this.masterDataService.createCodeValue(this.codeValueObj);
     if(resp['error'] == false){
-      await this.getAllPay()
-      swal.fire('Success...', 'Pay Added Successfully!', 'success')
+      await this.getCodeValue()
+      swal.fire('Success...', 'Code Value Added Successfully!', 'success')
 
     }else{
       swal.fire('Oops...', 'Something went wrong!', 'error')
 
     }
   }
-  async deletePay(element){
+  async deleteCodeValue(element){
     var obj = {acct_id : this.mainService.acct_id,id : element.id};
 
-    var resp  = await this.masterDataService.deletePay(JSON.stringify(obj));
+    var resp  = await this.masterDataService.deleteCodeValue(JSON.stringify(obj));
     if(resp['error'] == false){
-      await this.getAllPay()
-      swal.fire('Success...', 'Pay Deleted Successfully!', 'success');
+      await this.getCodeValue()
+      swal.fire('Success...', 'Code Value Deleted Successfully!', 'success');
 
 
     }else{

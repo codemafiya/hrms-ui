@@ -28,7 +28,7 @@ export class AllEmpService {
   }
 
   async updateEmployeeMasterData(obj){
-    const resp = await this.http.post<any>(this.httpUrl+'/updateEmployeeInfo',obj).toPromise().then(res => {
+    const resp = await this.http.put<any>(this.httpUrl+'/updateEmployeeInfo',obj).toPromise().then(res => {
         return res;
       });
       return resp; 

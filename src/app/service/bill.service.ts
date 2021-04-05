@@ -20,6 +20,20 @@ export class BillService {
       })
       return resp;
   }
+  async getMonthlyBill(obj){
+    const resp = await  this.http.get<any>(this.httpUrl+'/getMonthlyBill'+obj).toPromise().then(res=>{
+        return res;
+
+    })
+    return resp;
+}
+  async getBillItems(obj){
+    const resp = await  this.http.get<any>(this.httpUrl+'/getBillItems'+obj).toPromise().then(res=>{
+        return res;
+
+    })
+    return resp;
+}
   async createBill(obj){
     const resp = await  this.http.post<any>(this.httpUrl+'/createBill',obj).toPromise().then(res=>{
         return res;
