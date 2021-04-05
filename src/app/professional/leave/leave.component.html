@@ -1,3 +1,172 @@
-<p>
-  leave works!
-</p>
+<div class="page-content fade-in-up">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Leave Details</div>
+                </div>
+                <div class="ibox-body">
+                    <ul class="nav nav-tabs tabs-line">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#tab-7-1" data-toggle="tab"><i
+                                class="fa fa-line-chart"></i> Leave List</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-2" data-toggle="tab"><i class="fa fa-plus"></i> Add
+                              Leave Detail</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#tab-7-3" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Update
+                              Leave Detail</a>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-7-1">
+
+                            <br>
+                            <mat-form-field style="margin-left: 2%">
+                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                            </mat-form-field>
+                            <div class="example-container">
+
+                                <table mat-table [dataSource]="datasource" matSort>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="emp_id">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> ID </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_id}} </td>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="emp_name">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Name </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.emp_first_name}} {{element.emp_middle_name}} {{element.emp_last_name}} </td>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="leave_cd">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Leave Type </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.leave_cd}} </td>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="no_of_leaves">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> No. of Leaves </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right"> {{element.no_of_leaves}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="action">
+                                        <th mat-header-cell *matHeaderCellDef class="center" mat-sort-header> Action </th>
+                                        <td mat-cell flex-stretch *matCellDef="let row;let element" class="right">
+                                            <button class="btn btn-danger" (click)="deleteLeaveInfo(element)">Delete</button>
+
+                                            <button class="btn btn-primary" (click)="openUpdate(element)">Update</button>
+
+
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-7-2">
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Employee :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="addLeaveObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Leave Type :
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" [(ngModel)]="addLeaveObj['leave_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    No. of Leaves :
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" [(ngModel)]="addLeaveObj['no_of_leaves']">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="submit()">SUBMIT</button>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+                        </div>
+                        <div class="tab-pane" id="tab-7-3">
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Employee :
+                                </div>
+                                <div class="col-4">
+                                    <ng-select [items]="allEmp" bindLabel="name" bindValue="emp_id" [(ngModel)]="updateLeaveObj['emp_id']">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    Select Leave Type :
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" [(ngModel)]="updateLeaveObj['leave_cd']">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-4 text-right">
+                                    No. of Leaves :
+                                </div>
+                                <div class="col-4">
+                                    <input type="text" class="form-control" [(ngModel)]="updateLeaveObj['no_of_leaves']">
+                                </div>
+                            </div>
+                            <br>
+
+
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary" (click)="update()">UPDATE</button>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+                        </div>
+
+
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

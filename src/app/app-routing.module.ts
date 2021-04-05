@@ -15,6 +15,7 @@ import { BasicDtlComponent } from './personal/basic-dtl/basic-dtl.component';
 import { BankDtlComponent } from './personal/bank-dtl/bank-dtl.component';
 import { ProfessionalComponent } from './professional/professional.component';
 import { EstablishmentComponent } from './professional/establishment/establishment.component';
+import { LeaveComponent } from './professional/leave/leave.component';
 import { PostingComponent } from './professional/posting/posting.component';
 import { AttendanceComponent } from './professional/attendance/attendance.component';
 import { PromotionComponent } from './professional/promotion/promotion.component';
@@ -76,6 +77,10 @@ const routes: Routes = [
                     {
                         path: "establishment",
                         component: EstablishmentComponent,
+                    },
+                    {
+                        path: "leave",
+                        component: LeaveComponent,
                     },
                     
                 ]
